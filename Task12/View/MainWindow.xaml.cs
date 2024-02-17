@@ -8,6 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Task12.Model.Users;
+using Task12.ViewModel;
 
 namespace Task12
 {
@@ -19,6 +21,7 @@ namespace Task12
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainVM(new Manager());
         }
     }
 }
