@@ -29,21 +29,21 @@ namespace Task12.ViewModel
         public bool CompaniesEnabled
         {
             get => _CompaniesEnabled;
-            set => SetWithFilter(ref _CompaniesEnabled, value, FilterClients);
+            set => SetWithAction(ref _CompaniesEnabled, value, FilterClients);
         }
 
         private bool _PrivatePersonsEnabled = true;
         public bool PrivatePersonsEnabled
         {
             get => _PrivatePersonsEnabled;
-            set => SetWithFilter(ref _PrivatePersonsEnabled, value, FilterClients);
+            set => SetWithAction(ref _PrivatePersonsEnabled, value, FilterClients);
         }
 
         private string _TextFilterString = "";
         public string TextFilterString
         {
             get => _TextFilterString;
-            set => SetWithFilter(ref _TextFilterString, value, FilterClients);
+            set => SetWithAction(ref _TextFilterString, value, FilterClients);
         }
 
         private ObservableCollection<Client> _Clients;
@@ -72,7 +72,7 @@ namespace Task12.ViewModel
         public Client? SelectedClient
         {
             get => _SelectedClient;
-            set => Set(ref _SelectedClient, value);
+            set => SetWithAction(ref _SelectedClient, value, RefreshAccounts);
         }
 
         private Account? _SelectedAccount;
@@ -128,6 +128,11 @@ namespace Task12.ViewModel
         private bool TextFilter(Client client)
         {
             return client.Name.ToLower().Contains(TextFilterString.ToLower());
+        }
+
+        private void RefreshAccounts()
+        {
+            Accounts = new ObservableCollection<Account>(User.GetClientAccount(SelectedClient));
         }
     }
 }

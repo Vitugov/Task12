@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task12" xmlns:viewmodel="clr-namespace:Task12.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Астра Банк" Height="600" Width="700">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
             <Grid>
@@ -37,19 +37,20 @@
             </Grid>
             <DataGrid
                 ItemsSource="{Binding FilteredClients}"
+                SelectedItem="{Binding SelectedClient}"
                 AutoGenerateColumns="True"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Margin="5">
             </DataGrid>
+            <Button Content="Добавить клиента"/>
         </StackPanel>
 
         <DataGrid
             Grid.Column="1"
             ItemsSource="{Binding Accounts}"
+            SelectedItem="{Binding SelectedAccount}"
             AutoGenerateColumns="True"
             Margin="5"
         />
-        
-
     </Grid>
 </Window>

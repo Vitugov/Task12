@@ -25,11 +25,11 @@ namespace Task12.ViewModel
             return true;
         }
 
-        protected virtual bool SetWithFilter<T>(ref T field, T value,
-            Action refreshFilter, [CallerMemberName] string propertyName = null)
+        protected virtual bool SetWithAction<T>(ref T field, T value,
+            Action refreshAction, [CallerMemberName] string propertyName = null)
         {
             var result = Set(ref field, value, propertyName);
-            refreshFilter();
+            refreshAction();
             return result;
         }
 

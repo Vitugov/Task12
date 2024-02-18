@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task12.Model.Accounts
 {
-    internal class CurrentAccount : Account
+    public class CurrentAccount : Account
     {
+        public override string Name { get => "Current account"; }
     }
 }

@@ -7,10 +7,13 @@ using Task12.Model.Clients;
 
 namespace Task12.Model.Accounts
 {
-    public class Account
+    public abstract class Account
     {
+        public abstract string Name { get; }
         internal Client? Client { get; set; }
-        internal decimal Sum { get; set; }
+        public decimal Sum { get; set; }
+
+        
 
         internal Account(Client client)
         {
