@@ -11,19 +11,21 @@ namespace Task12.Model.Accounts
     {
         public abstract string Name { get; }
         internal Client? Client { get; set; }
+        internal long Code { get; set; }
         public decimal Sum { get; set; }
 
         
 
-        internal Account(Client client)
+        internal Account(Client client) : this()
         {
             Client = client;
-            Sum = 0;
         }
 
         internal Account()
         {
+            var rnd = new Random();
             Sum = 0;
+            Code = rnd.NextInt64();
         }
     }
 }

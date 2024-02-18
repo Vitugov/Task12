@@ -14,21 +14,32 @@ namespace Task12.Model
     {
         internal static void Start(Manager manager)
         {
+            Random rand = new Random();
+
+            // Генерация записей для компаний
+            string[] companyNames = { "Электрозавод", "Текстильщик", "Красный Октябрь", "Госстрах", "Пролетарий", "Металлург", "Автостроитель", "Химик", "Энергетик", "Строитель" };
             for (int i = 0; i < 10; i++)
             {
                 var client = manager.AddClient<Company>();
-                client.ShortName = "Company_" + i;
-                client.PhoneNumber = "+7913773" + i + "33" + i;
+                client.ShortName = companyNames[i];
+                // Генерация псевдослучайного телефона
+                client.PhoneNumber = $"+7913{rand.Next(100, 999)}{rand.Next(1000, 9999)}";
                 AddAccounts(client);
             }
+
+            // Генерация записей для частных лиц
+            string[] firstNames = { "Ярослав", "Всеволод", "Святослав", "Мстислав", "Ростислав", "Владислав", "Станислав", "Борислав", "Любомир", "Владимир" };
+            string[] patronymics = { "Владимирович", "Русланович", "Богданович", "Ярославович", "Святославович", "Мстиславович", "Ростиславович", "Дмитриевич", "Васильевич", "Игоревич" };
+            string[] surnames = { "Князев", "Волконский", "Рюрикович", "Драгомиров", "Святогоров", "Боянов", "Городецкий", "Добрынин", "Заболотный", "Измайлов" };
 
             for (int i = 0; i < 10; i++)
             {
                 var client = manager.AddClient<PrivatePerson>();
-                client.FirstName = "Имя_" + i;
-                client.Patronymic = "Отчество_" + i;
-                client.Surname = "Фамилия_" + i;
-                client.PhoneNumber = "+791377" + i + "132" + i;
+                client.FirstName = firstNames[i];
+                client.Patronymic = patronymics[i];
+                client.Surname = surnames[i];
+                // Генерация псевдослучайного телефона
+                client.PhoneNumber = $"+7913{rand.Next(100, 999)}{rand.Next(1000, 9999)}";
                 AddAccounts(client);
             }
         }
@@ -36,9 +47,9 @@ namespace Task12.Model
         private static void AddAccounts(Client client)
         {
             var rnd = new Random();
-            DataStorage.Current.AddAccount(new CurrentAccount() { Client = client, Sum = rnd.Next() / 1000});
-            DataStorage.Current.AddAccount(new SavingsAccount() { Client = client, Sum = rnd.Next() / 1000 });
-            DataStorage.Current.AddAccount(new CreditAccount()  { Client = client, Sum = rnd.Next() / 1000 });
+            DataStorage.Current.AddAccount(new CurrentAccount(client) { Sum = rnd.Next() / 1000 });
+            DataStorage.Current.AddAccount(new SavingsAccount(client) { Sum = rnd.Next() / 1000 });
+            DataStorage.Current.AddAccount(new CreditAccount(client)  { Sum = rnd.Next() / 1000 });
         }
     }
 }

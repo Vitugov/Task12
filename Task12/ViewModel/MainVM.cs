@@ -132,7 +132,10 @@ namespace Task12.ViewModel
 
         private void RefreshAccounts()
         {
-            Accounts = new ObservableCollection<Account>(User.GetClientAccount(SelectedClient));
+            if (SelectedClient == null)
+                Accounts = [];
+            else
+                Accounts = new ObservableCollection<Account>(User.GetClientAccount(SelectedClient));
         }
     }
 }
