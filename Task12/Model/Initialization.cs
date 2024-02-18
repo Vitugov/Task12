@@ -14,8 +14,18 @@ namespace Task12.Model
         {
             for (int i = 0; i < 10; i++)
             {
-                var client = manager.AddClient<Client>();
-                client.Name = "Client_" + i;
+                var client = manager.AddClient<Company>();
+                client.ShortName = "Company_" + i;
+                client.PhoneNumber = "+7913773" + i + "33" + i;
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                var client = manager.AddClient<PrivatePerson>();
+                client.FirstName = "Имя_" + i;
+                client.Patronymic = "Отчество_" + i;
+                client.Surname = "Фамилия_" + i;
+                client.PhoneNumber = "+791377" + i + "132" + i;
             }
         }
     }

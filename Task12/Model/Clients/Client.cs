@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Task12.Model.Clients
 {
-    public class Client
+    public abstract class Client
     {
-        public string Name { get; set; }
+        public abstract string Type { get; }
+        public abstract string Name { get; }
+        public abstract string Phone { get; }
     }
 }

@@ -44,7 +44,7 @@ namespace Task12.Model.Users
             where TAcceptor : Account
         {
             if (senderAcount.Sum < sum)
-                throw new InvalidOperationException("There is no eought money to transfer");
+                throw new InvalidOperationException("There is no enought money to transfer");
             senderAcount.Sum -= sum;
             acceptorAccount.Sum += sum;
         }
@@ -53,11 +53,6 @@ namespace Task12.Model.Users
             where T : Account
         {
             account.Sum += sum;
-        }
-
-        internal List<Client> GetClientsList()
-        {
-            return DataStorage.Current.GetClients();
         }
     }
 }

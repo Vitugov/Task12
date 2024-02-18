@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Task12.Model.Accounts
 {
-    internal class CreditAccount
+    public class CreditAccount : Account
     {
+        public decimal Limit { get; set; }
     }
 }
