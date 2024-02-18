@@ -57,7 +57,7 @@ namespace Task12.Model
 
         internal List<Client> GetClients()
         {
-            return [.. Accounts.Keys];
+            return [..Accounts.Keys];
         }
     }
 }

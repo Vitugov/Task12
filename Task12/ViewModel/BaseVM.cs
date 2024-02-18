@@ -25,6 +25,14 @@ namespace Task12.ViewModel
             return true;
         }
 
+        protected virtual bool SetWithFilter<T>(ref T field, T value,
+            Action refreshFilter, [CallerMemberName] string propertyName = null)
+        {
+            var result = Set(ref field, value, propertyName);
+            refreshFilter();
+            return result;
+        }
+
         public void Dispose()
         {
             Dispose(true);
