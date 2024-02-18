@@ -49,7 +49,7 @@ namespace Task12.Model
             var rnd = new Random();
             DataStorage.Current.AddAccount(new CurrentAccount(client) { Sum = rnd.Next() / 1000 });
             DataStorage.Current.AddAccount(new SavingsAccount(client) { Sum = rnd.Next() / 1000 });
-            DataStorage.Current.AddAccount(new CreditAccount(client)  { Sum = rnd.Next() / 1000 });
+            DataStorage.Current.AddAccount(new CreditAccount(client)  { Sum = 0 });
         }
     }
 }

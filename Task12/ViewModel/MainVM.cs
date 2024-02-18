@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Reflection;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using Task12.Commands;
 using Task12.Model;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
@@ -82,6 +84,15 @@ namespace Task12.ViewModel
             set => Set(ref _SelectedAccount, value);
         }
 
+        public RelayCommand EditClientCommand { get; }
+        public RelayCommand AddClientCommand { get; }
+        public RelayCommand MoneyTransferClientToClientCommand { get; }
+
+        public RelayCommand CloseAccountCommand { get; }
+        public RelayCommand EditAccountCommand { get; }
+        public RelayCommand AddAccountCommand { get; }
+        public RelayCommand TopUpAccountCommand { get; }
+        public RelayCommand MoneyTransferAccountToAccountCommand { get; }
         public MainVM(User user)
         {
             User = user;
@@ -101,6 +112,8 @@ namespace Task12.ViewModel
             CompaniesEnabled = true;
             PrivatePersonsEnabled = true;
             TextFilterString = "";
+
+            CloseAccountCommand = new RelayCommand(CloseAccount, CanCloseAccount);
 
         }
         private void FilterClients()
@@ -136,6 +149,22 @@ namespace Task12.ViewModel
                 Accounts = [];
             else
                 Accounts = new ObservableCollection<Account>(User.GetClientAccount(SelectedClient));
+        }
+
+        private void CloseAccount(object obj)
+        {
+            var account = obj as Account;
+            var manager = User as Manager;
+            manager.CloseAccount(account);
+            RefreshAccounts();
+        }
+
+        private bool CanCloseAccount(object obj)
+        {
+            return 
+                obj != null &&
+                (User.GetType() == typeof(Manager)) &&
+                ((obj as Account).Sum == 0);
         }
     }
 }

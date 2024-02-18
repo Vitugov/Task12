@@ -90,7 +90,9 @@
 
             <Button
                     Content="Удалить счет"
-                    Margin="5">
+                    Margin="5"
+                    Command="{Binding CloseAccountCommand}"
+                    CommandParameter="{Binding SelectedAccount}">
             </Button>
         </StackPanel>
 
