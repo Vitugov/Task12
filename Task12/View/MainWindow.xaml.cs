@@ -21,7 +21,9 @@ namespace Task12
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainVM(new Manager());
+            var vm = new MainVM(new Manager());
+            DataContext = vm;
+            this.Activated += vm.WindowActivated;
         }
     }
 }

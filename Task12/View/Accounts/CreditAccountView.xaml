@@ -1,0 +1,36 @@
+﻿<Window x:Class="Task12.View.Accounts.CreditAccountView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:conv="clr-namespace:Task12.Converters"
+    mc:Ignorable="d"
+    Title="Кредитный счет" Height="350" Width="300">
+    <Window.Resources>
+        <conv:StringToDecimalConverter x:Key="StringToDecimalConverter"/>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Клиент:" Margin="5,5,5,0"/>
+            <TextBlock Text="{Binding Client}" Margin="5,0,5,5" FontWeight="Bold"/>
+            <TextBlock Text="Тип счета:" Margin="5,5,5,0"/>
+            <TextBlock Text="Кредитный" Margin="5,0,5,5" FontWeight="Bold"/>
+            <TextBlock Text="Счет:" Margin="5,5,5,0"/>
+            <TextBlock Text="{Binding Name}" Margin="5,0,5,5" FontWeight="Bold"/>
+            <TextBlock Text="Сумма:" Margin="5,5,5,0"/>
+            <TextBox Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,5" FontWeight="Bold"/>
+            <TextBlock Text="Лимит:" Margin="5,5,5,0"/>
+            <TextBox Text="{Binding Limit, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,5" FontWeight="Bold"/>
+            <TextBlock Text="Ставка процента в месяц:" Margin="5,5,5,0"/>
+            <TextBox Text="{Binding InterestRateInMonth, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,5" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width ="*"/>
+                    <ColumnDefinition Width ="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Отмена" Margin="5" Command="{Binding CancelCommand}"/>
+                <Button Grid.Column="1" Content="Ok" Margin="5" Command="{Binding OkCommand}"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

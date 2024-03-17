@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task12" xmlns:viewmodel="clr-namespace:Task12.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
-        Title="Астра Банк" Height="580" Width="800">
+        Title="Астра Банк" Height="580" Width="850">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="55*"/>
-            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
             <TextBlock FontSize="14" FontWeight="Bold" Margin="5">Клиенты</TextBlock>
@@ -60,6 +60,7 @@
             </Grid>
             <Button
                     Content="Перевод от клиента клиенту"
+                    Command="{Binding MoneyTransferClientToClientCommand}"
                     Margin="5">
             </Button>
         </StackPanel>
@@ -73,18 +74,22 @@
             </DataGrid>
             <Button
                     Content="Перевод со счета на счет"
+                    Command="{Binding MoneyTransferAccountToAccountCommand}"
                     Margin="5">
             </Button>
             <Button
                     Content="Пополнить счет"
+                    Command="{Binding TopUpAccountCommand}"
                     Margin="5">
             </Button>
             <Button
                     Content="Добавить счет"
+                    Command="{Binding AddAccountCommand}"
                     Margin="5">
             </Button>
             <Button
                     Content="Изменить счет"
+                    Command="{Binding EditAccountCommand}"
                     Margin="5">
             </Button>
 

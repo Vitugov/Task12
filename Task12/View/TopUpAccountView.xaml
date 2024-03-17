@@ -1,0 +1,31 @@
+﻿<Window x:Class="Task12.View.TopUpAccountView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task12"
+        xmlns:conv="clr-namespace:Task12.Converters"
+        mc:Ignorable="d"
+        Title="TopUpAccountView" Height="200" Width="300">
+    <Window.Resources>
+        <conv:StringToDecimalConverter x:Key="StringToDecimalConverter"/>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Пополнить" Margin="5,5,5,0"/>
+            <TextBlock Text="{Binding Account}" Margin="5,0,5,0" FontWeight="Bold"/>
+            <TextBlock Text="Клиента" Margin="5,5,5,0"/>
+            <TextBlock Text="{Binding Client}"  Margin="5,0,5,0" FontWeight="Bold"/>
+            <TextBlock Text="На сумму" Margin="5"/>
+            <TextBox Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,0"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width ="*"/>
+                    <ColumnDefinition Width ="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Отмена" Margin="5" Command="{Binding CancelCommand}"/>
+                <Button Grid.Column="1" Content="Ok" Margin="5" Command="{Binding OkCommand}"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

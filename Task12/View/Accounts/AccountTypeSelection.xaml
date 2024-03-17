@@ -1,0 +1,23 @@
+﻿<Window x:Class="Task12.View.Accounts.AccountTypeSelection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Task12.View.Accounts"
+        mc:Ignorable="d"
+        Title="Выбор типа создаваемого счета" Height="135" Width="250">
+    <Grid>
+        <StackPanel>
+            <TextBlock Margin="5" Text="Выберите тип создаваемого счета:" TextBlock.FontSize="12" FontWeight="Bold"/>
+            <ComboBox Margin="5" ItemsSource="{Binding AccountTypes}" SelectedItem="{Binding SelectedType}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Margin="5" Command="{Binding CancelCommand}">Cancel</Button>
+                <Button Margin="5" Command="{Binding OkCommand}" Grid.Column="1">OK</Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

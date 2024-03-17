@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,11 +10,15 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows;
 using Task12.Commands;
 using Task12.Model;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
+using Task12.View.Accounts;
+using Task12.ViewModel.Accounts;
+using Task12.View;
 
 namespace Task12.ViewModel
 {
@@ -84,8 +89,8 @@ namespace Task12.ViewModel
             set => Set(ref _SelectedAccount, value);
         }
 
-        public RelayCommand EditClientCommand { get; }
-        public RelayCommand AddClientCommand { get; }
+        //public RelayCommand EditClientCommand { get; }
+        //public RelayCommand AddClientCommand { get; }
         public RelayCommand MoneyTransferClientToClientCommand { get; }
 
         public RelayCommand CloseAccountCommand { get; }
@@ -102,7 +107,8 @@ namespace Task12.ViewModel
             {
 
                 var manager = User as Manager;
-                Initialization.Start(manager);
+                //Initialization.Start(manager);
+                Serialization.Deserialize();
 
                 Clients = new ObservableCollection<Client>(manager.GetClientsList());
                 FilteredClients = CollectionViewSource.GetDefaultView(Clients);
@@ -114,7 +120,13 @@ namespace Task12.ViewModel
             TextFilterString = "";
 
             CloseAccountCommand = new RelayCommand(CloseAccount, CanCloseAccount);
-
+            AddAccountCommand = new RelayCommand(n => (new AccountTypeSelection(user, SelectedClient)).Show(),
+                n => SelectedClient != null);
+            EditAccountCommand = new RelayCommand(n => EditAccount(SelectedAccount), n => SelectedAccount != null);
+            TopUpAccountCommand = new RelayCommand(n => (new TopUpAccountView(user, SelectedClient, SelectedAccount)).Show(),
+                n => SelectedAccount != null);
+            MoneyTransferClientToClientCommand = new RelayCommand(n => (new TransferView(user, SelectedClient, SelectedAccount, false)).Show());
+            MoneyTransferAccountToAccountCommand = new RelayCommand(n => (new TransferView(user, SelectedClient, SelectedAccount, true)).Show());
         }
         private void FilterClients()
         {
@@ -165,6 +177,35 @@ namespace Task12.ViewModel
                 obj != null &&
                 (User.GetType() == typeof(Manager)) &&
                 ((obj as Account).Sum == 0);
+        }
+
+        private void EditAccount(object obj)
+        {
+            var accountType = obj.GetType();
+            var account = obj as Account;
+            Window window;
+            
+            if (accountType == typeof(CurrentAccount))
+            {
+                window = new CurrentAccountView(_User, SelectedClient, account);
+                window.Show();
+            }
+            else if (accountType == typeof(CreditAccount))
+            {
+                window = new CreditAccountView(_User, SelectedClient, account);
+                window.Show();
+            }
+            else if (accountType == typeof(SavingsAccount))
+            {
+                window = new SavingAccountView(_User, SelectedClient, account);
+                window.Show();
+            }
+        }
+
+
+        public void WindowActivated(object sender, System.EventArgs e)
+        {
+            RefreshAccounts();
         }
     }
 }
