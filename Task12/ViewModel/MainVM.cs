@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
 using Task12.Commands;
-using Task12.Model;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
 using Task12.View.Accounts;
 using Task12.ViewModel.Accounts;
 using Task12.View;
+using Task12.Model.Serialization;
 
 namespace Task12.ViewModel
 {
@@ -201,11 +201,14 @@ namespace Task12.ViewModel
                 window.Show();
             }
         }
-
-
         public void WindowActivated(object sender, System.EventArgs e)
         {
             RefreshAccounts();
+        }
+
+        public void OnWindowClosing()
+        {
+            Serialization.Serialize();
         }
     }
 }
