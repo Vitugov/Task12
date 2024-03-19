@@ -6,26 +6,38 @@
         xmlns:local="clr-namespace:Task12"
         xmlns:conv="clr-namespace:Task12.Converters"
         mc:Ignorable="d"
-        Title="TopUpAccountView" Height="200" Width="300">
+        Title="Пополнение счета" Height="280" Width="350">
     <Window.Resources>
         <conv:StringToDecimalConverter x:Key="StringToDecimalConverter"/>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
     </Window.Resources>
-    <Grid>
+    <Border Padding="10">
         <StackPanel>
-            <TextBlock Text="Пополнить" Margin="5,5,5,0"/>
-            <TextBlock Text="{Binding Account}" Margin="5,0,5,0" FontWeight="Bold"/>
-            <TextBlock Text="Клиента" Margin="5,5,5,0"/>
-            <TextBlock Text="{Binding Client}"  Margin="5,0,5,0" FontWeight="Bold"/>
-            <TextBlock Text="На сумму" Margin="5"/>
-            <TextBox Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,0"/>
+            <TextBlock Text="Пополнить" Style="{StaticResource TextBlockStyle}"/>
+            <TextBlock Text="{Binding Account}" Style="{StaticResource TextBlockStyle}" FontWeight="Bold"/>
+            <TextBlock Text="Клиента" Style="{StaticResource TextBlockStyle}"/>
+            <TextBlock Text="{Binding Client}"  Style="{StaticResource TextBlockStyle}" FontWeight="Bold"/>
+            <TextBlock Text="На сумму" Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,20"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width ="*"/>
                     <ColumnDefinition Width ="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Отмена" Margin="5" Command="{Binding CancelCommand}"/>
-                <Button Grid.Column="1" Content="Ok" Margin="5" Command="{Binding OkCommand}"/>
+                <Button Grid.Column="0" Content="Отмена" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}"/>
+                <Button Grid.Column="1" Content="Ok" Command="{Binding OkCommand}" Style="{StaticResource ButtonStyle}"/>
             </Grid>
         </StackPanel>
-    </Grid>
+    </Border>
 </Window>

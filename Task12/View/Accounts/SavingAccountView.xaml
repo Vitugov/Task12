@@ -5,32 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:conv="clr-namespace:Task12.Converters"
         mc:Ignorable="d"
-        Title="Сберегательный счет" Height="350" Width="300">
+        Title="Сберегательный счет" Height="450" Width="330">
     <Window.Resources>
         <conv:StringToDecimalConverter x:Key="StringToDecimalConverter"/>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="90"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="5,0,5,10"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
     </Window.Resources>
-    <Grid>
+    <Border Padding="10">
         <StackPanel>
-            <TextBlock Text="Клиент:" Margin="5,5,5,0"/>
-            <TextBlock Text="{Binding Client}" Margin="5,0,5,5" FontWeight="Bold"/>
-            <TextBlock Text="Тип счета:" Margin="5,5,5,0"/>
-            <TextBlock Text="Сберегательный" Margin="5,0,5,5" FontWeight="Bold"/>
-            <TextBlock Text="Счет:" Margin="5,5,5,0"/>
-            <TextBlock Text="{Binding Name}" Margin="5,0,5,5" FontWeight="Bold"/>
-            <TextBlock Text="Сумма:" Margin="5,5,5,0"/>
-            <TextBox Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,5" FontWeight="Bold"/>
-            <TextBlock Text="Лимит:" Margin="5,5,5,0"/>
-            <TextBox Text="{Binding Limit, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,5" FontWeight="Bold"/>
-            <TextBlock Text="Ставка процента в месяц:" Margin="5,5,5,0"/>
-            <TextBox Text="{Binding InterestRateInMonth, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0,5,5" FontWeight="Bold"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Клиент:"/>
+            <TextBlock Text="{Binding Client}" Margin="5,0,5,10" FontWeight="Bold"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Тип счета:"/>
+            <TextBlock Text="Сберегательный" Margin="5,0,5,10" FontWeight="Bold"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Счет:"/>
+            <TextBlock Text="{Binding Name}" Margin="5,0,5,10" FontWeight="Bold"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Сумма:"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Минимальная сумма:"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Limit, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Ставка процента в месяц:"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding InterestRateInMonth, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width ="*"/>
-                    <ColumnDefinition Width ="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Отмена" Margin="5" Command="{Binding CancelCommand}"/>
-                <Button Grid.Column="1" Content="Ok" Margin="5" Command="{Binding OkCommand}"/>
+                <Button Grid.Column="0" Content="Отмена" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}"/>
+                <Button Grid.Column="1" Content="Ok" Command="{Binding OkCommand}" Style="{StaticResource ButtonStyle}"/>
             </Grid>
         </StackPanel>
-    </Grid>
+    </Border>
 </Window>

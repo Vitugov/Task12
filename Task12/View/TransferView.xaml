@@ -6,80 +6,51 @@
         xmlns:local="clr-namespace:Task12.View"
         xmlns:conv="clr-namespace:Task12.Converters"
         mc:Ignorable="d"
-        Title="Перевод средств" Height="220" Width="600">
+        Title="Перевод средств" Height="300" Width="700">
     <Window.Resources>
         <conv:StringToDecimalConverter x:Key="StringToDecimalConverter"/>
         <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width ="*"/>
             <ColumnDefinition Width ="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <TextBlock
-                Text="Отправитель:"
-                Margin="5,5,5,0"
-                FontWeight="Bold">
-            </TextBlock>
-            <ComboBox
-                ItemsSource="{Binding Clients, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SenderClient}"
-                Margin="5,0,5,5">
-            </ComboBox>
-            <TextBlock
-                Text="Счет отправителя:"
-                Margin="5,5,5,0"
-                FontWeight="Bold"
-                Visibility="{Binding IsAcountToAcountTransfer, Converter={StaticResource BooleanToVisibilityConverter}}">
-            </TextBlock>
-            <ComboBox
-                ItemsSource="{Binding SenderAccounts, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SenderAccount}"
-                Visibility="{Binding IsAcountToAcountTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Margin="5,0,5,5">
-            </ComboBox>
-            <TextBlock
-                Text="Сумма перевода:"
-                Margin="5,5,5,0"
-                FontWeight="Bold">
-            </TextBlock>
-            <TextBox
-                Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}"
-                Margin="5,0,5,5">
-            </TextBox>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            <TextBlock
-                Text="Получатель:"
-                Margin="5,5,5,0"
-                FontWeight="Bold">
-            </TextBlock>
-            <ComboBox 
-                ItemsSource="{Binding Clients, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding AcceptorClient}"
-                Margin="5,0,5,5">
-            </ComboBox>
-            <TextBlock
-                Text="Счет получателя:"
-                Margin="5,5,5,0"
-                FontWeight="Bold"
-                Visibility="{Binding IsAcountToAcountTransfer, Converter={StaticResource BooleanToVisibilityConverter}}">
-            </TextBlock>
-            <ComboBox
-                ItemsSource="{Binding AcceptorAccounts, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding AcceptorAccount}"
-                Visibility="{Binding IsAcountToAcountTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"
-                Margin="5,0,5,5">
-            </ComboBox>
-            <TextBlock
-               Text="{Binding Notification, UpdateSourceTrigger=PropertyChanged}"
-               Margin="5,20,5,0"
-               FontWeight="Bold"
-               Foreground="DarkRed">
-            </TextBlock>
-        </StackPanel>
-        <Button Grid.Column="0" Height="25" Content="Отмена" Margin="5" Command="{Binding CancelCommand}" VerticalAlignment="Bottom"/>
-        <Button Grid.Column="1" Height="25" Content="Ok" Margin="5" Command="{Binding OkCommand}" VerticalAlignment="Bottom"/>
+        <Border Grid.Column="0" Padding="10" Margin="5">
+            <StackPanel>
+                <TextBlock Text="Отправитель:" Style="{StaticResource TextBlockStyle}"/>
+                <ComboBox ItemsSource="{Binding Clients, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SenderClient}" Margin="5,0"/>
+                <TextBlock Text="Счет отправителя:" Style="{StaticResource TextBlockStyle}" Visibility="{Binding IsAcountToAcountTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <ComboBox ItemsSource="{Binding SenderAccounts, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SenderAccount}" Visibility="{Binding IsAcountToAcountTransfer, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="5,0"/>
+                <TextBlock Text="Сумма перевода:" Style="{StaticResource TextBlockStyle}"/>
+                <TextBox Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}" Margin="5,0"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Padding="10" Margin="5">
+            <StackPanel>
+                <TextBlock Text="Получатель:" Style="{StaticResource TextBlockStyle}"/>
+                <ComboBox ItemsSource="{Binding Clients, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding AcceptorClient}" Margin="5,0"/>
+                <TextBlock Text="Счет получателя:" Style="{StaticResource TextBlockStyle}" Visibility="{Binding IsAcountToAcountTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <ComboBox ItemsSource="{Binding AcceptorAccounts, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding AcceptorAccount}" Visibility="{Binding IsAcountToAcountTransfer, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="5,0"/>
+                <TextBlock Text="{Binding Notification, UpdateSourceTrigger=PropertyChanged}" Margin="5,20,5,0" FontWeight="Bold" Foreground="DarkRed"/>
+            </StackPanel>
+        </Border>
+        <Button Grid.Column="0" Content="Отмена" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch"/>
+        <Button Grid.Column="1" Content="Ok" Command="{Binding OkCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch"/>
     </Grid>
 </Window>

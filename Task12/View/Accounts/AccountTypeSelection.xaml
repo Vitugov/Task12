@@ -5,19 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task12.View.Accounts"
         mc:Ignorable="d"
-        Title="Выбор типа создаваемого счета" Height="135" Width="250">
-    <Grid>
+        Title="Выбор типа создаваемого счета" Height="170" Width="300">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="90"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Margin" Value="5,5,5,10"/>
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+    </Window.Resources>
+    <Border Padding="10">
         <StackPanel>
-            <TextBlock Margin="5" Text="Выберите тип создаваемого счета:" TextBlock.FontSize="12" FontWeight="Bold"/>
-            <ComboBox Margin="5" ItemsSource="{Binding AccountTypes}" SelectedItem="{Binding SelectedType}"/>
+            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Выберите тип создаваемого счета:"/>
+            <ComboBox Style="{StaticResource ComboBoxStyle}" ItemsSource="{Binding AccountTypes}" SelectedItem="{Binding SelectedType}"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button Margin="5" Command="{Binding CancelCommand}">Cancel</Button>
-                <Button Margin="5" Command="{Binding OkCommand}" Grid.Column="1">OK</Button>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelCommand}">Cancel</Button>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding OkCommand}" Grid.Column="1">OK</Button>
             </Grid>
         </StackPanel>
-    </Grid>
+    </Border>
 </Window>
