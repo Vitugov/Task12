@@ -8,6 +8,8 @@ using Newtonsoft.Json;
 using Task12.Model.Accounts;
 using System.IO;
 using Task12.ViewModel.Accounts;
+using Task12.Model.Users;
+using Task12.Model;
 
 namespace Task12.Model.Serialization
 {
@@ -37,9 +39,20 @@ namespace Task12.Model.Serialization
             settings.Converters.Add(new AccountConverter());
             settings.Formatting = Formatting.Indented;
 
-            // Для десериализации:
             var deserializedData = JsonConvert.DeserializeObject<List<KeyValuePair<Client, List<Account>>>>(jsonString, settings);
             DataStorage.Current.Accounts = deserializedData.ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        internal static void Load(Manager manager)
+        {
+            if (File.Exists("_Data.json"))
+            {
+                Serialization.Deserialize();
+            }
+            else
+            {
+                Initialization.Start(manager);
+            }
         }
     }
 }

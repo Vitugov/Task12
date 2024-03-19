@@ -19,6 +19,8 @@ using Task12.View.Accounts;
 using Task12.ViewModel.Accounts;
 using Task12.View;
 using Task12.Model.Serialization;
+using System.IO;
+using Task12.Model;
 
 namespace Task12.ViewModel
 {
@@ -105,10 +107,8 @@ namespace Task12.ViewModel
             Clients = [];
             if (user.GetType() == typeof(Manager))
             {
-
                 var manager = User as Manager;
-                //Initialization.Start(manager);
-                Serialization.Deserialize();
+                Serialization.Load(manager);
 
                 Clients = new ObservableCollection<Client>(manager.GetClientsList());
                 FilteredClients = CollectionViewSource.GetDefaultView(Clients);
