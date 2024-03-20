@@ -26,7 +26,7 @@ namespace Task12.View.Accounts
         public CreditAccountView(User user, Client client, Account account)
         {
             InitializeComponent();
-            DataContext = new CreditAccountVM(user, client, account, this);
+            DataContext = new CreditAccountVM(user, client, account);
         }
     }
 }

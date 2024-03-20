@@ -26,7 +26,7 @@ namespace Task12.View.Accounts
         public SavingAccountView(User user, Client client, Account account)
         {
             InitializeComponent();
-            DataContext = new SavingAccountVM(user, client, account, this);
+            DataContext = new SavingAccountVM(user, client, account);
         }
     }
 }

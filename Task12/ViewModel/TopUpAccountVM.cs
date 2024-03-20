@@ -21,21 +21,17 @@ namespace Task12.ViewModel
             set => Set(ref _Sum, value);
         }
 
-        public TopUpAccountVM(User user, Client client, Account account, Window window)
-            : base(user, client, account, window)
+        public TopUpAccountVM(User user, Client client, Account account)
+            : base(user, client, account)
         {
-            OkCommand = new RelayCommand(x => OkCommandExecute());
-            CancelCommand = new RelayCommand(x => Window.Close());
+
+            OkCommand = new RelayCommand(obj => { SaveCommand(); CloseWindow(obj); });
         }
 
-        public RelayCommand OkCommand { get; }
-        public RelayCommand CancelCommand { get; }
-
-        private void OkCommandExecute()
+        private void SaveCommand()
         {
             var manager = User as Manager;
             manager.Replenishment(Sum, Account);
-            Window.Close();
         }
     }
 }

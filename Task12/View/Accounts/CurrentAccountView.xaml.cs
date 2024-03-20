@@ -26,7 +26,7 @@ namespace Task12.View.Accounts
         public CurrentAccountView(User user, Client client, Account account)
         {
             InitializeComponent();
-            DataContext = new CurrentAccountVM(user, client, account, this);
+            DataContext = new CurrentAccountVM(user, client, account);
         }
     }
 }

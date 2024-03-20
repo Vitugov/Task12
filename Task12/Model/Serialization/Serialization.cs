@@ -40,6 +40,7 @@ namespace Task12.Model.Serialization
             settings.Formatting = Formatting.Indented;
 
             var deserializedData = JsonConvert.DeserializeObject<List<KeyValuePair<Client, List<Account>>>>(jsonString, settings);
+            deserializedData.ForEach(pair => pair.Value.ForEach(acc => acc.Client = pair.Key));
             DataStorage.Current.Accounts = deserializedData.ToDictionary(x => x.Key, x => x.Value);
         }
 

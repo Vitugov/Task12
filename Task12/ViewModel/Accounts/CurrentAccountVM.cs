@@ -22,25 +22,17 @@ namespace Task12.ViewModel.Accounts
             get => _Sum;
             set => Set(ref _Sum, value);
         }
-        public RelayCommand OkCommand { get; }
-        public RelayCommand CancelCommand { get; }
-        public CurrentAccountVM(User user, Client client, Account account, Window window)
-            : base(user, client, account, window)
+
+        public CurrentAccountVM(User user, Client client, Account account)
+            : base(user, client, account)
         {
             Sum = CurrentAccount.Sum;
-            OkCommand = new RelayCommand(x => ExecuteOkCommand());
-            CancelCommand = new RelayCommand(x => window.Close());
+            OkCommand = new RelayCommand(obj => { SaveCommand(); CloseWindow(obj); });
         }
 
         private void SaveCommand()
         {
             CurrentAccount.Sum = Sum;
-        }
-
-        private void ExecuteOkCommand()
-        {
-            SaveCommand();
-            Window.Close();
         }
     }
 }

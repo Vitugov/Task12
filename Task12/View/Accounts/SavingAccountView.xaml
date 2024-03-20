@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:conv="clr-namespace:Task12.Converters"
         mc:Ignorable="d"
+        Name="SavingAccount"
         Title="Сберегательный счет" Height="450" Width="330">
     <Window.Resources>
         <conv:StringToDecimalConverter x:Key="StringToDecimalConverter"/>
@@ -47,8 +48,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Отмена" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}"/>
-                <Button Grid.Column="1" Content="Ok" Command="{Binding OkCommand}" Style="{StaticResource ButtonStyle}"/>
+                <Button Grid.Column="0" Content="Отмена" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=SavingAccount}" Style="{StaticResource ButtonStyle}"/>
+                <Button Grid.Column="1" Content="Ok" Command="{Binding OkCommand}" CommandParameter="{Binding ElementName=SavingAccount}" Style="{StaticResource ButtonStyle}"/>
             </Grid>
         </StackPanel>
     </Border>

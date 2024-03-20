@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Task12.View.Accounts"
         mc:Ignorable="d"
+        Name="TypeSelector"
         Title="Выбор типа создаваемого счета" Height="170" Width="300">
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -36,8 +37,8 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelCommand}">Cancel</Button>
-                <Button Style="{StaticResource ButtonStyle}" Command="{Binding OkCommand}" Grid.Column="1">OK</Button>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=TypeSelector}">Cancel</Button>
+                <Button Style="{StaticResource ButtonStyle}" Command="{Binding OkCommand}" CommandParameter="{Binding ElementName=TypeSelector}" Grid.Column="1">OK</Button>
             </Grid>
         </StackPanel>
     </Border>

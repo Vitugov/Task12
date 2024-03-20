@@ -32,8 +32,10 @@ namespace Task12.ViewModel.Accounts
             get => _SelectedType;
             set => Set(ref _SelectedType, value);
         }
+        public RelayCommand OkCommand { get; }
+        public RelayCommand CancelCommand { get; }
 
-        public TypeSelectionVM(User user, AccountTypeSelection window, Client client)
+        public TypeSelectionVM(User user, Client client)
         {
             _AccountTypesDic = new Dictionary<string, Type>()
             {
@@ -45,14 +47,11 @@ namespace Task12.ViewModel.Accounts
             _SelectedType = "Текущий счет";
             _Client = client;
             _User = user;
-            CancelCommand = new RelayCommand(x => window.Close());
-            OkCommand = new RelayCommand(x => Execute_OkCommand(window), x => SelectedType != null);
+            CancelCommand = new RelayCommand(obj => CloseWindow(obj));
+            OkCommand = new RelayCommand(obj => { Execute_OkCommand(); CloseWindow(obj); }, obj => SelectedType != null);
         }
 
-        public RelayCommand OkCommand { get; }
-        public RelayCommand CancelCommand { get; }
-
-        private void Execute_OkCommand(Window window)
+        private void Execute_OkCommand()
         {
             Window newWindow;
             var manager = _User as Manager;
@@ -77,8 +76,8 @@ namespace Task12.ViewModel.Accounts
                     newWindow.Show();
                     break;
             }
-            window.Close();
         }
+        internal void CloseWindow(object obj) => (obj as Window).Close();
 
     }
 }

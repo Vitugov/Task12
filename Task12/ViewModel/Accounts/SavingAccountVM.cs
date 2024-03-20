@@ -37,16 +37,13 @@ namespace Task12.ViewModel.Accounts
             set => Set(ref _InterestRateInMonth, value);
         }
 
-        public RelayCommand OkCommand { get; }
-        public RelayCommand CancelCommand { get; }
-        public SavingAccountVM(User user, Client client, Account account, Window window)
-            : base(user, client, account, window)
+        public SavingAccountVM(User user, Client client, Account account)
+            : base(user, client, account)
         {
             Sum = SavingsAccount.Sum;
             Limit = SavingsAccount.MinSum;
             InterestRateInMonth = SavingsAccount.InterestRateInMonth;
-            OkCommand = new RelayCommand(x => ExecuteOkCommand());
-            CancelCommand = new RelayCommand(x => window.Close());
+            OkCommand = new RelayCommand(obj => { SaveCommand(); CloseWindow(obj); });
         }
 
         private void SaveCommand()
@@ -54,12 +51,6 @@ namespace Task12.ViewModel.Accounts
             SavingsAccount.Sum = Sum;
             SavingsAccount.MinSum = Limit;
             SavingsAccount.InterestRateInMonth = InterestRateInMonth;
-        }
-
-        private void ExecuteOkCommand()
-        {
-            SaveCommand();
-            Window.Close();
         }
     }
 }

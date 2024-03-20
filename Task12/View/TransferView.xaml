@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Task12.View"
         xmlns:conv="clr-namespace:Task12.Converters"
         mc:Ignorable="d"
+        Name ="Transfer"
         Title="Перевод средств" Height="300" Width="700">
     <Window.Resources>
         <conv:StringToDecimalConverter x:Key="StringToDecimalConverter"/>
@@ -50,7 +51,7 @@
                 <TextBlock Text="{Binding Notification, UpdateSourceTrigger=PropertyChanged}" Margin="5,20,5,0" FontWeight="Bold" Foreground="DarkRed"/>
             </StackPanel>
         </Border>
-        <Button Grid.Column="0" Content="Отмена" Command="{Binding CancelCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch"/>
-        <Button Grid.Column="1" Content="Ok" Command="{Binding OkCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch"/>
+        <Button Grid.Column="0" Content="Отмена" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=Transfer}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch"/>
+            <Button Grid.Column="1" Content="Ok" Command="{Binding OkCommand}" CommandParameter="{Binding ElementName=Transfer}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Stretch"/>
     </Grid>
 </Window>

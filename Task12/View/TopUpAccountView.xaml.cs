@@ -27,7 +27,7 @@ namespace Task12.View
         public TopUpAccountView(User user, Client client, Account account)
         {
             InitializeComponent();
-            DataContext = new TopUpAccountVM(user, client, account, this);
+            DataContext = new TopUpAccountVM(user, client, account);
         }
     }
 }

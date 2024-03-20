@@ -19,7 +19,6 @@ namespace Task12.ViewModel
     internal class TransferVM : BaseVM
     {
         private readonly User _User;
-        private readonly Window _Window;
 
         private bool _IsAcountToAcountTransfer;
         private Client _SenderClient;
@@ -28,7 +27,6 @@ namespace Task12.ViewModel
         private Account _AcceptorAccount;
 
         public User User => _User;
-        public Window Window => _Window;
         public bool IsAcountToAcountTransfer
         {
             get => _IsAcountToAcountTransfer;
@@ -97,13 +95,12 @@ namespace Task12.ViewModel
         public RelayCommand OkCommand { get; }
         public RelayCommand CancelCommand { get; }
 
-        public TransferVM(User user, Client client, Account account, Window window, bool isAcountToAcountTransfer)
+        public TransferVM(User user, Client client, Account account, bool isAcountToAcountTransfer)
         {
             _IsAcountToAcountTransfer = isAcountToAcountTransfer;
             _User = user;
             _SenderClient = client;
             _SenderAccount = account;
-            _Window = window;
 
             SenderAccountsRefresh();
             AcceptorAccounts = [];
@@ -115,8 +112,8 @@ namespace Task12.ViewModel
                 Clients = new ObservableCollection<Client>(manager.GetClientsList());
             }
 
-            OkCommand = new RelayCommand(x => ExecuteOkCommand(), x => Notification == "");
-            CancelCommand = new RelayCommand(x => Window.Close());
+            OkCommand = new RelayCommand(win => ExecuteOkCommand(win), win => Notification == "");
+            CancelCommand = new RelayCommand(win => CloseWindow(win));
             UpdateNotification();
         }
 
@@ -145,7 +142,7 @@ namespace Task12.ViewModel
             UpdateNotification();
         }
 
-        private void ExecuteOkCommand()
+        private void ExecuteOkCommand(object obj)
         {
             var manager = User as Manager;
             if (IsAcountToAcountTransfer)
@@ -156,7 +153,12 @@ namespace Task12.ViewModel
             {
                 manager.TransferBetweenClients(Sum, SenderClient, AcceptorClient);
             }
-            Window.Close();
+            CloseWindow(obj);
+        }
+
+        private void CloseWindow(object obj)
+        {
+            (obj as Window).Close();
         }
         private string GetNotification()
         {

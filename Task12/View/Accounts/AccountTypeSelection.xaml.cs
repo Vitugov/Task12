@@ -25,7 +25,7 @@ namespace Task12.View.Accounts
         public AccountTypeSelection(User user, Client client)
         {
             InitializeComponent();
-            DataContext = new TypeSelectionVM(user, this, client);
+            DataContext = new TypeSelectionVM(user, client);
         }
     }
 }

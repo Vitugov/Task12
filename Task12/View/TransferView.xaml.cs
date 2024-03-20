@@ -26,7 +26,7 @@ namespace Task12.View
         public TransferView(User user, Client client, Account account, bool isAccountToAccountTransfer)
         {
             InitializeComponent();
-            DataContext = new TransferVM(user, client, account, this, isAccountToAccountTransfer);
+            DataContext = new TransferVM(user, client, account, isAccountToAccountTransfer);
         }
     }
 }
