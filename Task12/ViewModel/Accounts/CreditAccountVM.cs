@@ -50,6 +50,7 @@ namespace Task12.ViewModel.Accounts
             CreditAccount.Sum = Sum;
             CreditAccount.Limit = Limit;
             CreditAccount.InterestRateInMonth = InterestRateInMonth;
+            ChangeAccountEventCall();
         }
     }
 }

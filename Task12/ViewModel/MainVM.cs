@@ -169,6 +169,7 @@ namespace Task12.ViewModel
             var manager = User as Manager;
             manager.CloseAccount(account);
             RefreshAccounts();
+
         }
 
         private bool CanCloseAccount(object obj)

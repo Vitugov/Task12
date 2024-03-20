@@ -5,6 +5,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using Task12.EventModel;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 
@@ -13,7 +14,8 @@ namespace Task12.Model.Users
     internal class Manager : User
     {
         internal string Name { get; set; }
-        
+
+        internal event Action<object, AccountEventArgs>? AccountEvent;
         internal T AddClient<T>()
             where T : Client, new()
         {
@@ -31,6 +33,9 @@ namespace Task12.Model.Users
                 Sum = 0
             };
             DataStorage.Current.AddAccount(newAccount);
+            
+            var accountEventArgs = new AccountEventArgs(AccountOperation.Open, this, client, newAccount);
+            AccountEvent?.Invoke(this, accountEventArgs);
             return newAccount;
         }
         internal void CloseAccount<T>(T account)
@@ -39,21 +44,34 @@ namespace Task12.Model.Users
             if (account.Sum != 0)
                 throw new InvalidOperationException("Couldn't close account becouse Account Sum does not equal 0");
             DataStorage.Current.RemoveAccount(account);
+
+            var accountEventArgs = new AccountEventArgs(AccountOperation.Close, this, account.Client, account);
+            AccountEvent?.Invoke(this, accountEventArgs);
         }
-        internal void Transfer<TSender, TAcceptor>(decimal sum, TSender senderAcount, TAcceptor acceptorAccount)
+        internal void Transfer<TSender, TAcceptor>(decimal sum, TSender senderAccount, TAcceptor acceptorAccount)
             where TSender : Account
             where TAcceptor : Account
         {
-            if (!IsMoneyEnought(sum, senderAcount))
+            if (!IsMoneyEnought(sum, senderAccount))
                 throw new InvalidOperationException("There is no enought money to transfer");
-            senderAcount.Sum -= sum;
+            senderAccount.Sum -= sum;
             acceptorAccount.Sum += sum;
+            
+            var accountEventArgs1 = new AccountEventArgs(AccountOperation.Expenditure, this,
+                senderAccount.Client, senderAccount, sum, acceptorAccount.Client, acceptorAccount);
+            AccountEvent?.Invoke(this, accountEventArgs1);
+            var accountEventArgs2 = new AccountEventArgs(AccountOperation.Receipt, this,
+                acceptorAccount.Client, acceptorAccount, sum, senderAccount.Client, senderAccount);
+            AccountEvent?.Invoke(this, accountEventArgs2);
         }
 
         internal void Replenishment<T>(decimal sum, T account)
             where T : Account
         {
             account.Sum += sum;
+            
+            var accountEventArgs = new AccountEventArgs(AccountOperation.TopUp, this, account.Client, account, sum);
+            AccountEvent?.Invoke(this, accountEventArgs);
         }
 
         internal bool IsMoneyEnought(decimal sum, Account account) => account.Sum - account.Minimum >= sum;

@@ -36,5 +36,11 @@ namespace Task12.ViewModel.Accounts
         }
 
         internal void CloseWindow(object obj) => (obj as Window).Close();
+
+        internal void ChangeAccountEventCall()
+        {
+            var accountEventArgs = new AccountEventArgs(AccountOperation.Change, User, Client, Account);
+            NotificationEvent.AccountEvent?.Invoke(this, accountEventArgs);
+        }
     }
 }

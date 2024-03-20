@@ -33,6 +33,7 @@ namespace Task12.ViewModel.Accounts
         private void SaveCommand()
         {
             CurrentAccount.Sum = Sum;
+            ChangeAccountEventCall();
         }
     }
 }

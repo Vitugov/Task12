@@ -6,7 +6,7 @@
         xmlns:conv="clr-namespace:Task12.Converters"
         mc:Ignorable="d"
         Name="CurrentAccount"
-        Title="Текущий счет" Height="330" Width="300">
+        Title="Текущий счет" Height="260" Width="300">
     <Window.Resources>
         <conv:StringToDecimalConverter x:Key="StringToDecimalConverter"/>
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -37,8 +37,6 @@
             <TextBlock Text="Текущий" Margin="5,0,5,10" FontWeight="Bold"/>
             <TextBlock Style="{StaticResource TextBlockStyle}" Text="Счет:"/>
             <TextBlock Text="{Binding Name}" Margin="5,0,5,10" FontWeight="Bold"/>
-            <TextBlock Style="{StaticResource TextBlockStyle}" Text="Сумма:"/>
-            <TextBox Style="{StaticResource TextBoxStyle}" Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToDecimalConverter}}"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

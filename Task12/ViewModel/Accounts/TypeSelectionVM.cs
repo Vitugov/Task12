@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Task12.Commands;
+using Task12.EventModel;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;

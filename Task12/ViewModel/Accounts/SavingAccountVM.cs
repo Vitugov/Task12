@@ -51,6 +51,7 @@ namespace Task12.ViewModel.Accounts
             SavingsAccount.Sum = Sum;
             SavingsAccount.MinSum = Limit;
             SavingsAccount.InterestRateInMonth = InterestRateInMonth;
+            ChangeAccountEventCall();
         }
     }
 }
