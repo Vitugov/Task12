@@ -14,26 +14,15 @@ namespace Task12.ViewModel.Accounts
 {
     class CurrentAccountVM : AccountVM
     {
-        private decimal _Sum;
         public CurrentAccount CurrentAccount => Account as CurrentAccount;
         public string Name => Account.Name;
-        public decimal Sum
-        {
-            get => _Sum;
-            set => Set(ref _Sum, value);
-        }
 
         public CurrentAccountVM(User user, Client client, Account account)
             : base(user, client, account)
         {
-            Sum = CurrentAccount.Sum;
             OkCommand = new RelayCommand(obj => { SaveCommand(); CloseWindow(obj); });
         }
 
-        private void SaveCommand()
-        {
-            CurrentAccount.Sum = Sum;
-            ChangeAccountEventCall();
-        }
+        private void SaveCommand() {}
     }
 }

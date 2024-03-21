@@ -13,17 +13,11 @@ namespace Task12.ViewModel.Accounts
 {
     class CreditAccountVM : AccountVM
     {
-        private decimal _Sum;
         private decimal _Limit;
         private decimal _InterestRateInMonth;
 
         public CreditAccount CreditAccount => Account as CreditAccount;
         public string Name => Account.Name;
-        public decimal Sum
-        {
-            get => _Sum; 
-            set => Set(ref _Sum,value);
-        }
 
         public decimal Limit
         {
@@ -39,7 +33,6 @@ namespace Task12.ViewModel.Accounts
         public CreditAccountVM(User user, Client client, Account account)
             : base(user, client, account)
         {
-            Sum = CreditAccount.Sum;
             Limit = CreditAccount.Limit;
             InterestRateInMonth = CreditAccount.InterestRateInMonth;
             OkCommand = new RelayCommand(obj => { SaveCommand(); CloseWindow(obj); });
@@ -47,10 +40,8 @@ namespace Task12.ViewModel.Accounts
 
         private void SaveCommand()
         {
-            CreditAccount.Sum = Sum;
-            CreditAccount.Limit = Limit;
-            CreditAccount.InterestRateInMonth = InterestRateInMonth;
-            ChangeAccountEventCall();
+            var manager = User as Manager;
+            manager.ChangeAccountData(Account, Limit, InterestRateInMonth);
         }
     }
 }

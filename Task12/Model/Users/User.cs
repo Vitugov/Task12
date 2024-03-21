@@ -10,6 +10,7 @@ namespace Task12.Model.Users
 {
     public class User
     {
+        internal string? Name { get; set; }
         internal List<Client> GetClientsList()
         {
             return DataStorage.Current.GetClients();

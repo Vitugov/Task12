@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using Task12.EventModel;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 
@@ -13,6 +14,7 @@ namespace Task12.Model
     {
         static internal DataStorage Current { get; set;}
         internal Dictionary<Client, List<Account>> Accounts { get; set; }
+        internal List<NotificationMessage> Log {  get; set; }
         
         static DataStorage()
         {
@@ -21,6 +23,7 @@ namespace Task12.Model
         internal DataStorage()
         {
             Accounts = [];
+            Log = [];
         }
         internal void AddClient(Client client)
         {
@@ -58,6 +61,12 @@ namespace Task12.Model
         internal List<Client> GetClients()
         {
             return [..Accounts.Keys];
+        }
+
+        internal void UpdateLog(object sender, AccountEventArgs e)
+        {
+            var note = new NotificationMessage(e);
+            Log.Add(note);
         }
     }
 }

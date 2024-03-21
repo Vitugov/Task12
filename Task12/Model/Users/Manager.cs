@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -8,12 +9,17 @@ using System.Windows.Documents;
 using Task12.EventModel;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
+using Task12.ViewModel.Accounts;
 
 namespace Task12.Model.Users
 {
     internal class Manager : User
     {
-        internal string Name { get; set; }
+        internal Manager()
+        {
+            Name = "Менеджер";
+            AccountEvent += DataStorage.Current.UpdateLog;
+        }
 
         internal event Action<object, AccountEventArgs>? AccountEvent;
         internal T AddClient<T>()
@@ -121,6 +127,55 @@ namespace Task12.Model.Users
                 acceptorAccount = acceptorAccounts.First();
 
             return acceptorAccount;
+        }
+
+        public void ChangeAccountData(Account account, decimal? limit = null, decimal? interestRateInMonth = null)
+        {
+            var type = account.GetType();
+            var changes = 0;
+            if (type == typeof(CurrentAccount))
+            {
+                return;
+            }
+
+            if (type == typeof(CreditAccount))
+            {
+                var creditAccount = account as CreditAccount;
+                
+                if (limit != null && creditAccount.Limit != (decimal)limit)
+                {
+                    creditAccount.Limit = (decimal)limit;
+                    changes += 1;
+                }
+                if (interestRateInMonth != null && creditAccount.InterestRateInMonth != (decimal)interestRateInMonth)
+                {
+                    creditAccount.InterestRateInMonth = (decimal)interestRateInMonth;
+                    changes += 1;
+                }
+            }
+
+            if (type == typeof(SavingsAccount))
+            {
+                var savingAccount = account as SavingsAccount;
+
+                if (limit != null && savingAccount.MinSum != (decimal)limit)
+                {
+                    savingAccount.MinSum = (decimal)limit;
+                    changes += 1;
+                }
+                if (interestRateInMonth != null && savingAccount.InterestRateInMonth != (decimal)interestRateInMonth)
+                {
+                    savingAccount.InterestRateInMonth = (decimal)interestRateInMonth;
+                    changes += 1;
+                }
+            }
+
+            if (changes > 0)
+            {
+                var accountEventArgs = new AccountEventArgs(AccountOperation.Change, this, account.Client, account);
+                AccountEvent?.Invoke(this, accountEventArgs);
+            }
+            
         }
     }
 }
