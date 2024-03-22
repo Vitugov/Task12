@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Task12.ViewModel
+namespace WPFUsefullThings
 {
     public class BaseVM : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        public virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        public virtual bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(field, value)) return false;
             field = value;
@@ -25,7 +20,7 @@ namespace Task12.ViewModel
             return true;
         }
 
-        protected virtual bool SetWithAction<T>(ref T field, T value,
+        public virtual bool SetWithAction<T>(ref T field, T value,
             Action refreshAction, [CallerMemberName] string propertyName = null)
         {
             var result = Set(ref field, value, propertyName);
@@ -40,7 +35,7 @@ namespace Task12.ViewModel
 
         private bool _Disposed;
 
-        protected virtual void Dispose(bool disposing)
+        public virtual void Dispose(bool disposing)
         {
             if (!disposing || _Disposed) return;
             _Disposed = true;

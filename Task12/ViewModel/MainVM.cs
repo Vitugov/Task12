@@ -3,15 +3,8 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Reflection;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
-using Task12.Commands;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
@@ -21,6 +14,7 @@ using Task12.View;
 using Task12.Model.Serialization;
 using System.IO;
 using Task12.Model;
+using WPFUsefullThings;
 
 namespace Task12.ViewModel
 {

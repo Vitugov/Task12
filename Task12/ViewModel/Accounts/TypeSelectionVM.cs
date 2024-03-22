@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Task12.Commands;
+using WPFUsefullThings;
 using Task12.EventModel;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
