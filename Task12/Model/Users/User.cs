@@ -18,7 +18,7 @@ namespace Task12.Model.Users
 
         internal List<Account> GetClientAccount(Client client)
         {
-            return DataStorage.Current.GetAccounts(client);
+            return client.GetAccounts();
         }
     }
 }

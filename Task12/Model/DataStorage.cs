@@ -35,7 +35,7 @@ namespace Task12.Model
 
         internal void AddAccount(Account account)
         {
-            var accountsList = GetAccounts(account.Client);
+            var accountsList = account.Client.GetAccounts();
             if (accountsList.Contains(account))
                 throw new InvalidOperationException("Account already is in the DataStorage");
             
@@ -44,7 +44,7 @@ namespace Task12.Model
 
         internal void RemoveAccount(Account account)
         {
-            var accountsList = GetAccounts(account.Client);
+            var accountsList = account.Client.GetAccounts();
             if (!accountsList.Contains(account))
                 throw new NullReferenceException("There is no Account in the DataStorage");
             

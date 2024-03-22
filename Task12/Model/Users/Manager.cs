@@ -26,7 +26,7 @@ namespace Task12.Model.Users
             where T : Client, new()
         {
             var newClient = new T();
-            DataStorage.Current.AddClient(newClient);
+            newClient.Save();
             return newClient;
         }
         
@@ -38,7 +38,7 @@ namespace Task12.Model.Users
                 Client = client,
                 Sum = 0
             };
-            DataStorage.Current.AddAccount(newAccount);
+            newAccount.Save();
             
             var accountEventArgs = new AccountEventArgs(AccountOperation.Open, this, client, newAccount);
             AccountEvent?.Invoke(this, accountEventArgs);
@@ -49,7 +49,7 @@ namespace Task12.Model.Users
         {
             if (account.Sum != 0)
                 throw new InvalidOperationException("Couldn't close account becouse Account Sum does not equal 0");
-            DataStorage.Current.RemoveAccount(account);
+            account.Delete();
 
             var accountEventArgs = new AccountEventArgs(AccountOperation.Close, this, account.Client, account);
             AccountEvent?.Invoke(this, accountEventArgs);
@@ -93,7 +93,7 @@ namespace Task12.Model.Users
 
         internal bool IsMoneyEnought(decimal sum, Client client, out List<Account> accountsList)
         {
-            accountsList = DataStorage.Current.GetAccounts(client);
+            accountsList = client.GetAccounts();
             return accountsList.Select(acc => acc.Sum - acc.Minimum).Sum() >= sum;
         }
 
@@ -136,7 +136,7 @@ namespace Task12.Model.Users
 
         private Account SelectAcceptorAccount(Client client)
         {
-            var acceptorAccounts = DataStorage.Current.GetAccounts(client);
+            var acceptorAccounts = client.GetAccounts();
             var acceptorAccount = acceptorAccounts
                 .Where(acc => acc.GetType() == typeof(CurrentAccount))
                 .FirstOrDefault();
