@@ -15,7 +15,25 @@ namespace Task12.Model
         static internal DataStorage Current { get; set;}
         internal Dictionary<Client, List<Account>> Accounts { get; set; }
         internal List<NotificationMessage> Log {  get; set; }
-        
+
+        public static DataStorage operator +(DataStorage dataStorage, Client client)
+        {
+            client.Save();
+            return dataStorage;
+        }
+
+        public static DataStorage operator +(DataStorage dataStorage, Account account)
+        {
+            account.Save();
+            return dataStorage;
+        }
+
+        public static DataStorage operator -(DataStorage dataStorage, Account account)
+        {
+            account.Delete();
+            return dataStorage;
+        }
+
         static DataStorage()
         {
             Current = new DataStorage();
