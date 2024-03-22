@@ -58,8 +58,17 @@ namespace Task12.Model.Users
             where TSender : Account
             where TAcceptor : Account
         {
-            if (!IsMoneyEnought(sum, senderAccount))
-                throw new InvalidOperationException("There is no enought money to transfer");
+
+            try
+            {
+                if (!IsMoneyEnought(sum, senderAccount))
+                    throw new InvalidOperationException("There is no enought money to transfer");
+            }
+            catch
+            {
+                return;
+            }
+
             senderAccount.Sum -= sum;
             acceptorAccount.Sum += sum;
             
@@ -93,9 +102,18 @@ namespace Task12.Model.Users
             where TSender : Client
             where TAcceptor : Client
         {
-            if (!IsMoneyEnought(sum, sender, out var senderAccounts))
-                throw new InvalidOperationException("There is no enought money to transfer");
+            
+            try
+            {
+                if (!IsMoneyEnought(sum, sender, out var senderAccountsExt))
+                    throw new InvalidOperationException("There is no enought money to transfer");
+            }
+            catch
+            {
+                return;
+            }
 
+            var k = IsMoneyEnought(sum, sender, out var senderAccounts);
             var acceptorAccount = SelectAcceptorAccount(acceptor);
             
             decimal sumToDebit = sum;
