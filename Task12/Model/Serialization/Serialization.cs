@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Task12.Model.Clients;
-using Newtonsoft.Json;
-using Task12.Model.Accounts;
+﻿using Newtonsoft.Json;
 using System.IO;
-using Task12.ViewModel.Accounts;
-using Task12.Model.Users;
-using Task12.Model;
 using Task12.EventModel;
+using Task12.Model.Accounts;
+using Task12.Model.Clients;
+using Task12.Model.Users;
 
 namespace Task12.Model.Serialization
 {

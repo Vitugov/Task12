@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Task12.Model.Clients;
+﻿using Task12.Model.Clients;
 
 namespace Task12.Model.Accounts
 {
@@ -11,7 +6,7 @@ namespace Task12.Model.Accounts
     {
         public override string Name { get => "Кредитный счет №" + Code; }
         public decimal Limit { get; set; }
-        
+
         public decimal InterestRateInMonth { get; set; }
 
         public override decimal Minimum => Limit;

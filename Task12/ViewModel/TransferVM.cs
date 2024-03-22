@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Data;
-using Task12.Model;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
-using Task12.ViewModel.Accounts;
 using WPFUsefullThings;
 
 namespace Task12.ViewModel
@@ -164,7 +155,7 @@ namespace Task12.ViewModel
         private string GetNotification()
         {
             var manager = User as Manager;
-            
+
             if (SenderClient == null)
             {
                 return "Выберите отправителя";

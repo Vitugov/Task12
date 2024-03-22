@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using Task12.EventModel;
-using Task12.Model.Accounts;
+﻿using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
 using Task12.ViewModel.Accounts;

@@ -1,15 +1,6 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
-using Task12.EventModel;
+﻿using Task12.EventModel;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
-using Task12.ViewModel.Accounts;
 
 namespace Task12.Model.Users
 {
@@ -29,7 +20,7 @@ namespace Task12.Model.Users
             newClient.Save();
             return newClient;
         }
-        
+
         internal T OpenAccount<T>(Client client)
             where T : Account, new()
         {
@@ -39,7 +30,7 @@ namespace Task12.Model.Users
                 Sum = 0
             };
             newAccount.Save();
-            
+
             var accountEventArgs = new AccountEventArgs(AccountOperation.Open, this, client, newAccount);
             AccountEvent?.Invoke(this, accountEventArgs);
             return newAccount;
@@ -71,7 +62,7 @@ namespace Task12.Model.Users
 
             senderAccount.Sum -= sum;
             acceptorAccount.Sum += sum;
-            
+
             var accountEventArgs1 = new AccountEventArgs(AccountOperation.Expenditure, this,
                 senderAccount.Client, senderAccount, sum, acceptorAccount.Client, acceptorAccount);
             AccountEvent?.Invoke(this, accountEventArgs1);
@@ -84,7 +75,7 @@ namespace Task12.Model.Users
             where T : Account
         {
             account.Sum += sum;
-            
+
             var accountEventArgs = new AccountEventArgs(AccountOperation.TopUp, this, account.Client, account, sum);
             AccountEvent?.Invoke(this, accountEventArgs);
         }
@@ -97,12 +88,12 @@ namespace Task12.Model.Users
             return accountsList.Select(acc => acc.Sum - acc.Minimum).Sum() >= sum;
         }
 
-        
+
         internal void TransferBetweenClients<TSender, TAcceptor>(decimal sum, TSender sender, TAcceptor acceptor)
             where TSender : Client
             where TAcceptor : Client
         {
-            
+
             try
             {
                 if (!IsMoneyEnought(sum, sender, out var senderAccountsExt))
@@ -115,9 +106,9 @@ namespace Task12.Model.Users
 
             var k = IsMoneyEnought(sum, sender, out var senderAccounts);
             var acceptorAccount = SelectAcceptorAccount(acceptor);
-            
+
             decimal sumToDebit = sum;
-            foreach ( var senderAccount in senderAccounts)
+            foreach (var senderAccount in senderAccounts)
             {
                 var freeMoney = senderAccount.Sum - senderAccount.Minimum;
 
@@ -159,7 +150,7 @@ namespace Task12.Model.Users
             if (type == typeof(CreditAccount))
             {
                 var creditAccount = account as CreditAccount;
-                
+
                 if (limit != null && creditAccount.Limit != (decimal)limit)
                 {
                     creditAccount.Limit = (decimal)limit;
@@ -193,7 +184,7 @@ namespace Task12.Model.Users
                 var accountEventArgs = new AccountEventArgs(AccountOperation.Change, this, account.Client, account);
                 AccountEvent?.Invoke(this, accountEventArgs);
             }
-            
+
         }
     }
 }

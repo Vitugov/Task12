@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Input;
-using WPFUsefullThings;
-using Task12.EventModel;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
 using Task12.View.Accounts;
+using WPFUsefullThings;
 
 namespace Task12.ViewModel.Accounts
 {
@@ -64,7 +57,7 @@ namespace Task12.ViewModel.Accounts
                     newWindow = new CurrentAccountView(_User, _Client, account);
                     newWindow.Show();
                     break;
-                    
+
                 case "Кредитный счет":
                     account = manager.OpenAccount<CreditAccount>(_Client);
                     newWindow = new CreditAccountView(_User, _Client, account);

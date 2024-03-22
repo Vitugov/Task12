@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using WPFUsefullThings;
-using Task12.Model.Accounts;
+﻿using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
-using Task12.View.Accounts;
+using WPFUsefullThings;
 
 namespace Task12.ViewModel.Accounts
 {
@@ -23,6 +16,6 @@ namespace Task12.ViewModel.Accounts
             OkCommand = new RelayCommand(obj => { SaveCommand(); CloseWindow(obj); });
         }
 
-        private void SaveCommand() {}
+        private void SaveCommand() { }
     }
 }

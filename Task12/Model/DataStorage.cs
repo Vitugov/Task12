@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using Task12.EventModel;
+﻿using Task12.EventModel;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
 
@@ -12,9 +6,9 @@ namespace Task12.Model
 {
     internal class DataStorage
     {
-        static internal DataStorage Current { get; set;}
+        static internal DataStorage Current { get; set; }
         internal Dictionary<Client, List<Account>> Accounts { get; set; }
-        internal List<NotificationMessage> Log {  get; set; }
+        internal List<NotificationMessage> Log { get; set; }
 
         public static DataStorage operator +(DataStorage dataStorage, Client client)
         {
@@ -47,7 +41,7 @@ namespace Task12.Model
         {
             if (Accounts.ContainsKey(client))
                 throw new InvalidOperationException("Client already is in the DataStorage");
-            
+
             Accounts.Add(client, []);
         }
 
@@ -56,16 +50,16 @@ namespace Task12.Model
             var accountsList = account.Client.GetAccounts();
             if (accountsList.Contains(account))
                 throw new InvalidOperationException("Account already is in the DataStorage");
-            
+
             Accounts[account.Client].Add(account);
-        }       
+        }
 
         internal void RemoveAccount(Account account)
         {
             var accountsList = account.Client.GetAccounts();
             if (!accountsList.Contains(account))
                 throw new NullReferenceException("There is no Account in the DataStorage");
-            
+
             Accounts[account.Client].Remove(account);
         }
 
@@ -78,7 +72,7 @@ namespace Task12.Model
 
         internal List<Client> GetClients()
         {
-            return [..Accounts.Keys];
+            return [.. Accounts.Keys];
         }
 
         internal void UpdateLog(object sender, AccountEventArgs e)

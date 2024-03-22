@@ -1,19 +1,13 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Windows.Data;
 using System.Windows;
+using System.Windows.Data;
 using Task12.Model.Accounts;
 using Task12.Model.Clients;
-using Task12.Model.Users;
-using Task12.View.Accounts;
-using Task12.ViewModel.Accounts;
-using Task12.View;
 using Task12.Model.Serialization;
-using System.IO;
-using Task12.Model;
+using Task12.Model.Users;
+using Task12.View;
+using Task12.View.Accounts;
 using WPFUsefullThings;
 
 namespace Task12.ViewModel
@@ -108,7 +102,7 @@ namespace Task12.ViewModel
                 FilteredClients = CollectionViewSource.GetDefaultView(Clients);
                 FilteredClients.Filter = ClientFilter;
             }
-            
+
             CompaniesEnabled = true;
             PrivatePersonsEnabled = true;
             TextFilterString = "";
@@ -168,7 +162,7 @@ namespace Task12.ViewModel
 
         private bool CanCloseAccount(object obj)
         {
-            return 
+            return
                 obj != null &&
                 (User.GetType() == typeof(Manager)) &&
                 ((obj as Account).Sum == 0);
@@ -179,7 +173,7 @@ namespace Task12.ViewModel
             var accountType = obj.GetType();
             var account = obj as Account;
             Window window;
-            
+
             if (accountType == typeof(CurrentAccount))
             {
                 window = new CurrentAccountView(_User, SelectedClient, account);

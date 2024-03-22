@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
-using Task12.Model.Accounts;
+﻿using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
 
@@ -47,9 +41,9 @@ namespace Task12.Model
         private static void AddAccounts(Client client)
         {
             var rnd = new Random();
-            (new CurrentAccount(client) { Sum = rnd.Next() / 1000 } ).Save();
+            (new CurrentAccount(client) { Sum = rnd.Next() / 1000 }).Save();
             (new SavingsAccount(client) { Sum = rnd.Next() / 1000 }).Save();
-            (new CreditAccount(client)  { Sum = 0 }).Save();
+            (new CreditAccount(client) { Sum = 0 }).Save();
         }
     }
 }

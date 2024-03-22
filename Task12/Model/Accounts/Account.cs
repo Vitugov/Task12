@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Task12.Model.Clients;
+﻿using Task12.Model.Clients;
 
 namespace Task12.Model.Accounts
 {
@@ -13,7 +8,7 @@ namespace Task12.Model.Accounts
         internal Client? Client { get; set; }
         internal long Code { get; set; }
         public decimal Sum { get; set; }
-        public abstract decimal Minimum { get;}
+        public abstract decimal Minimum { get; }
 
 
 

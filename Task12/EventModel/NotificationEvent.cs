@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Task12.Model.Accounts;
+﻿using Task12.Model.Accounts;
 using Task12.Model.Clients;
 using Task12.Model.Users;
 
@@ -11,7 +6,7 @@ namespace Task12.EventModel
 {
     //internal static class NotificationEvent
     //{
-        
+
     //    //internal event Action CloseAccountEvent; // время, юзер, клиент, аккаунт
     //    //internal event Action TopUpEvent;       // время, юзер, клиент, аккаунт, сумма пополнения
     //    //internal event Action FundsExpenditureEvent;    // время, юзер, клиент, аккаунт, контрагент, аккаунт контрагента, сумма превода
