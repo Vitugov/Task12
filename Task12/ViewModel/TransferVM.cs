@@ -112,7 +112,8 @@ namespace Task12.ViewModel
                 Clients = new ObservableCollection<Client>(manager.GetClientsList());
             }
 
-            OkCommand = new RelayCommand(win => ExecuteOkCommand(win), win => Notification == "" || Notification == "У отправителя недостаточно средств!");
+            OkCommand = new RelayCommand(win => ExecuteOkCommand(win), win => Notification == "" ||
+                Notification == "У отправителя недостаточно средств!" || Notification == "Недостаточно средств на счете!");
             CancelCommand = new RelayCommand(win => CloseWindow(win));
             UpdateNotification();
         }
