@@ -29,7 +29,7 @@ namespace Task12
             DataContext = vm;
             this.Activated += vm.WindowActivated;
             this.Closing += MainWindow_Closing;
-            manager.AccountEvent += OnAccountEvent;
+            //manager.AccountEvent += OnAccountEvent;
 
         }
         private void MainWindow_Closing(object sender, CancelEventArgs e)
