@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace WPFUsefullThings
 {
-    public class BaseVM : INotifyPropertyChanged, IDisposable
+    public class INotifyPropertyChangedPlus : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
