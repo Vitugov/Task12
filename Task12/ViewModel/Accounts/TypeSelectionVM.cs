@@ -8,7 +8,7 @@ using WPFUsefullThings;
 
 namespace Task12.ViewModel.Accounts
 {
-    class TypeSelectionVM : BaseVM
+    class TypeSelectionVM : INotifyPropertyChangedPlus
     {
         private readonly User _User;
         private readonly Client _Client;

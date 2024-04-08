@@ -7,7 +7,7 @@ using WPFUsefullThings;
 
 namespace Task12.ViewModel
 {
-    internal class TransferVM : BaseVM
+    internal class TransferVM : INotifyPropertyChangedPlus
     {
         private readonly User _User;
 

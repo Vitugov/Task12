@@ -12,7 +12,7 @@ using WPFUsefullThings;
 
 namespace Task12.ViewModel
 {
-    public class MainVM : BaseVM
+    public class MainVM : INotifyPropertyChangedPlus
 
     {
         private User _User;
