@@ -7,6 +7,8 @@ namespace WPFUsefullThings
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        private List<PropertyChangedEventHandler> _Subscribers = new List<PropertyChangedEventHandler>();
+
         public virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -28,6 +30,12 @@ namespace WPFUsefullThings
             return result;
         }
 
+        public void SubscribeToPropertyChanged(PropertyChangedEventHandler handler)
+        {
+            PropertyChanged += handler;
+            _Subscribers.Add(handler);
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -37,7 +45,17 @@ namespace WPFUsefullThings
 
         public virtual void Dispose(bool disposing)
         {
-            if (!disposing || _Disposed) return;
+            if (_Disposed) return;
+
+            if (disposing)
+            {
+                foreach (var subscriber in _Subscribers)
+                {
+                    PropertyChanged -= subscriber;
+                }
+                _Subscribers.Clear();
+            }
+
             _Disposed = true;
         }
     }
